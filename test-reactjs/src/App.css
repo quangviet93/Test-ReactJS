@@ -1,0 +1,112 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.screenStartGame,
+.screenAddPlayer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+table {
+  margin: 0 auto;
+}
+tbody {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+tbody tr {
+  display: flex;
+  justify-content: space-between;
+}
+th,
+td {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  border: 1px solid #333;
+}
+th {
+  width: 150px;
+}
+.buttonAddPlayer {
+  height: 50px;
+}
+.buttonListPlayer {
+  display: flex;
+  justify-content: space-between;
+}
+.buttonListPlayer button {
+  width: 40%;
+  height: 50px;
+}
+.screenGameManagement {
+  padding: 50px;
+}
+.container-screenGameManagement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.match {
+  width: 100px;
+  height: 40px;
+  background-color: gray;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.player {
+  padding: 40px;
+}
+.question {
+  display: flex;
+  padding-bottom: 40px;
+}
+.question div:first-child {
+  margin-right: 10px;
+}
+.answer {
+  display: flex;
+  padding: 0 30px;
+}
