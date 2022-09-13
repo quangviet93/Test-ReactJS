@@ -4,11 +4,18 @@ export const userSlice = createSlice({
   name: "users",
   initialState: {
     users: [],
-    awnser: {
+    limitMatch: 0,
+    answer: {
       // name: {
       //   name: "",
       //   awnserPlayer: [],
       //   score: 0,
+      // },
+    },
+    result: {
+      // api: {
+      //   name: "",
+      //   resultApi: [],
       // },
     },
   },
@@ -16,26 +23,42 @@ export const userSlice = createSlice({
     addUser: (state, action) => {
       state.users.push(action.payload);
     },
+    addMatch: (state, action) => {
+      const limit = Number(action.payload.limitMatch);
+      state.limitMatch = state.limitMatch + limit;
+    },
     dataAnswer: (state, action) => {
       const data = action.payload;
       const isCorrect = data.isCorrect;
-      console.log(data);
-      if (!state.awnser[data.namePlayer]) {
-        state.awnser[data.namePlayer] = {
+      if (!state.answer[data.namePlayer]) {
+        state.answer[data.namePlayer] = {
           name: "",
-          awnserPlayer: [],
+          answerPlayer: [],
+          answerApi: [],
           score: 0,
         };
       }
-      state.awnser[data.namePlayer].name = data.namePlayer;
-      state.awnser[data.namePlayer].awnserPlayer.push(data.answer);
+      state.answer[data.namePlayer].name = data.namePlayer;
+      state.answer[data.namePlayer].answerPlayer.push(data.answer);
+      state.answer[data.namePlayer].answerApi.push(data.answerApi);
       if (isCorrect === true) {
-        state.awnser[data.namePlayer].score =
-          state.awnser[data.namePlayer].score + 1;
+        state.answer[data.namePlayer].score =
+          state.answer[data.namePlayer].score + 1;
       }
+    },
+    addResult: (state, action) => {
+      const data = action.payload;
+      if (!state.result[data.namePlayer]) {
+        state.result[data.namePlayer] = {
+          name: "",
+          resultApi: [],
+        };
+      }
+      state.result[data.namePlayer].name = data.namePlayer;
+      state.result[data.namePlayer].resultApi.push(data.api);
     },
   },
 });
 
-export const { addUser, dataAnswer } = userSlice.actions;
+export const { addUser, addMatch, dataAnswer, addResult } = userSlice.actions;
 export default userSlice.reducer;

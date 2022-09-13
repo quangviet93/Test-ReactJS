@@ -13,6 +13,7 @@ const StartGame = () => {
       </div>
       <div>
         <Button
+          className="buttonAddPlayer"
           variant="primary"
           onClick={() => {
             navigate("/AddPlayer");

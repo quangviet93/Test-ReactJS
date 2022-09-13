@@ -72,11 +72,10 @@
 }
 .yesOrno {
   display: flex;
+  max-height: 300px;
 }
-.yesOrno div {
-  width: 100px;
-  height: 30px;
-  font-size: 20px;
+.yesOrno .result {
+  width: 50%;
 }
 .yesOrno button {
   width: 200px;
@@ -100,11 +99,34 @@
   padding: 0 30px;
 }
 .image-answer button {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 .backgroup-yes {
-  background-color: #0dcaf0;
+  background-color: #0dcaf0 !important;
+  color: #000 !important;
 }
 .backgroup-no {
-  background-color: #ffc107;
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+.gif-image {
+  height: 200px;
+  width: 300px;
+}
+.backgroup-incorrect {
+  background-color: red !important;
+}
+.backgroup-correct {
+  background-color: #19ff00 !important;
+}
+.result {
+  text-align: center;
+  border-radius: 2px;
+}
+.defaultDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px !important;
+  height: 200px !important;
 }

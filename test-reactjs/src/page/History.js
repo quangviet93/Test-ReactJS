@@ -5,9 +5,8 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
 function History() {
-  const userList = useSelector((state) => state.users.value);
-  const results = useSelector((state) => state.result);
-  const answers = useSelector((state) => state.answer);
+  const answers = useSelector((state) => state.users.answer);
+  console.log("answers", Object.keys(answers));
 
   return (
     <div className="screenGameManagement">
@@ -15,7 +14,6 @@ function History() {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
             <th>Name</th>
             <th>Answer</th>
             <th>Result</th>
@@ -23,13 +21,36 @@ function History() {
           </tr>
         </thead>
         <tbody>
+          {Object.keys(answers).map((name) =>
+            answers[name].answerPlayer.map((anwser, index) => (
+              <tr>
+                <td>{name}</td>
+                <td>{anwser}</td>
+                <td>{answers[name].answerApi[index]}</td>
+                <td>{anwser === answers[name].answerApi[index] ? 1 : 0}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </Table>
+      <Table striped bordered hover>
+        <thead>
           <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Otto</td>
+            <th>Summary</th>
+            <th>Correct percent</th>
+            <th>Total score</th>
           </tr>
+        </thead>
+        <tbody>
+          {Object.keys(answers).map((e) => (
+            <tr>
+              <td>{answers[e].name}</td>
+              <td>
+                {(100 / answers[e].answerPlayer.length) * answers[e].score}%
+              </td>
+              <td>{answers[e].score}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>
