@@ -12,12 +12,6 @@ export const userSlice = createSlice({
       //   score: 0,
       // },
     },
-    result: {
-      // api: {
-      //   name: "",
-      //   resultApi: [],
-      // },
-    },
   },
   reducers: {
     addUser: (state, action) => {
@@ -36,6 +30,7 @@ export const userSlice = createSlice({
           answerPlayer: [],
           answerApi: [],
           score: 0,
+          isValid: true,
         };
       }
       state.answer[data.namePlayer].name = data.namePlayer;
@@ -46,19 +41,22 @@ export const userSlice = createSlice({
           state.answer[data.namePlayer].score + 1;
       }
     },
-    addResult: (state, action) => {
-      const data = action.payload;
-      if (!state.result[data.namePlayer]) {
-        state.result[data.namePlayer] = {
-          name: "",
-          resultApi: [],
-        };
-      }
-      state.result[data.namePlayer].name = data.namePlayer;
-      state.result[data.namePlayer].resultApi.push(data.api);
+    searchPlayerName: (state, action) => {
+      Object.keys(state.answer).forEach((name) => {
+        if (
+          action.payload.searchNamePlayer === undefined ||
+          action.payload.searchNamePlayer === "" ||
+          name === action.payload.searchNamePlayer
+        ) {
+          state.answer[name].isValid = true;
+        } else {
+          state.answer[name].isValid = false;
+        }
+      });
     },
   },
 });
 
-export const { addUser, addMatch, dataAnswer, addResult } = userSlice.actions;
+export const { addUser, addMatch, dataAnswer, searchPlayerName } =
+  userSlice.actions;
 export default userSlice.reducer;

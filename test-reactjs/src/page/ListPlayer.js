@@ -2,16 +2,11 @@ import "../App.css";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import TitleGame from "../Component/TitleGame";
 import ModalCustom from "../Component/ModalCustom";
 
 function ListPlayer() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const [show, setShow] = useState(false);
   const [showReply, setShowReply] = useState(false);
 
   const handleCloseReply = () => setShowReply(false);
@@ -22,10 +17,6 @@ function ListPlayer() {
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = () => setShowDelete(true);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const [limitMatch, setLimitMatch] = useState(0);
   const userList = useSelector((state) => state.users.users);
   return (
     <div>

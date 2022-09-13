@@ -1,17 +1,18 @@
 import "../App.css";
+import Spinner from "react-bootstrap/Spinner";
 import NavBar from "../Component/NavBar";
 import Button from "react-bootstrap/Button";
-import Spinner from "react-bootstrap/Spinner";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { dataAnswer, addResult } from "../features/Users";
+import { dataAnswer } from "../features/Users";
 
 function GameManagement() {
   const axios = require("axios");
-  const [answerApi, setAnswerApi] = useState();
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const [image, SetImage] = useState(null);
-  const [contentResult, SetContentResult] = useState(null);
   const [isLastPlayer, setIsLastPlayer] = useState(false);
   const [isFinish, setIsFinish] = useState(false);
 
@@ -41,48 +42,54 @@ function GameManagement() {
     setAnswer(value);
   };
   const handleAnswer = async () => {
-    await axios({
-      method: "get",
-      url: "https://yesno.wtf/api",
-    }).then(function (res, req) {
-      setAnswerApi(res.data.answer);
-      SetImage(res.data.image);
-      if (res.data.answer === answer) {
-        setIsCorrect(true);
-      } else {
-        setIsCorrect(false);
-      }
-      setTimeout(() => {
+    console.log("answer", answer);
+    if (answer) {
+      setIsLoading(true);
+      await axios({
+        method: "get",
+        url: "https://yesno.wtf/api",
+      }).then(function (res, req) {
+        SetImage(res.data.image);
         if (res.data.answer === answer) {
-          setIsCorrect("Correct");
+          setIsCorrect(true);
         } else {
-          setIsCorrect("InCorrect");
+          setIsCorrect(false);
         }
-      }, 2000);
-      dispatch(
-        dataAnswer({
-          namePlayer: player.name,
-          answer,
-          answerApi: res.data.answer,
-          isCorrect: res.data.answer === answer,
-        })
-      );
-      setAnswer(null);
-      if (player.index === users.length - 1) {
-        if (match === limitMatch) {
-          setIsFinish(true);
-          setPlayer();
+        setTimeout(() => {
+          if (res.data.answer === answer) {
+            setIsCorrect("Correct");
+          } else {
+            setIsCorrect("InCorrect");
+          }
+        }, 2000);
+        dispatch(
+          dataAnswer({
+            namePlayer: player.name,
+            answer,
+            answerApi: res.data.answer,
+            isCorrect: res.data.answer === answer,
+          })
+        );
+        setAnswer(null);
+        if (player.index === users.length - 1) {
+          if (match === limitMatch) {
+            setIsFinish(true);
+            setPlayer();
+          }
+          setIsLastPlayer(true);
+          return;
         }
-        setIsLastPlayer(true);
-        return;
-      }
-      setPlayer({
-        index: player.index + 1,
-        name: users[player.index + 1].name,
+        setPlayer({
+          index: player.index + 1,
+          name: users[player.index + 1].name,
+        });
+        setIsLoading(false);
       });
-    });
+    }
+    return;
   };
   const handleNext = () => {
+    setIsLoading(false);
     if (player.index === users.length - 1) {
       setMatch(match + 1);
     }
@@ -97,7 +104,7 @@ function GameManagement() {
   return (
     <div className="screenGameManagement">
       <NavBar />
-      <div className="container-screenGameManagement">
+      <div className="containerScreenGameManagement">
         <div className="match">Match {match}</div>
         <div className="player">Player : {player?.name}</div>
         <div className="yesOrno">
@@ -114,7 +121,7 @@ function GameManagement() {
           <div className="defaultDiv">
             {isCorrect != null &&
               (typeof isCorrect === "boolean" ? (
-                <img className="gif-image" src={image} />
+                <img className="gifImage" src={image} />
               ) : (
                 <div
                   className={`result ${
@@ -138,7 +145,7 @@ function GameManagement() {
           </Button>
         </div>
         {isFinish ? (
-          <div className="image-answer">
+          <div className="imageAnswer">
             <Button
               variant="primary"
               onClick={() => {
@@ -149,7 +156,7 @@ function GameManagement() {
             </Button>
           </div>
         ) : isLastPlayer ? (
-          <div className="image-answer">
+          <div className="imageAnswer">
             <Button
               variant="secondary"
               onClick={() => {
@@ -160,15 +167,21 @@ function GameManagement() {
             </Button>
           </div>
         ) : (
-          <div className="image-answer">
-            <Button
-              variant="primary"
-              onClick={() => {
-                handleAnswer();
-              }}
-            >
-              Submit
-            </Button>
+          <div className="imageAnswer">
+            {!isLoading ? (
+              <Button
+                variant="primary"
+                onClick={() => {
+                  handleAnswer();
+                }}
+              >
+                Submit
+              </Button>
+            ) : (
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            )}
           </div>
         )}
       </div>

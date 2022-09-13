@@ -13,26 +13,37 @@ function ModalCustom(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [namePlayer, setNamePlayer] = useState("");
-  const [limitMatch, setLimitMatch] = useState(0);
+  const [namePlayer, setNamePlayer] = useState(null);
+  const [limitMatch, setLimitMatch] = useState(null);
 
   const handleSubmit = () => {
-    if (props.name === "Add") {
-      dispatch(
-        addUser({
-          id: userList.length === 0 ? 1 : userList[userList.length - 1].id + 1,
-          name: namePlayer,
-        })
-      );
-      props.handleCloseReply();
-    } else if (props.name === "Match") {
-      dispatch(
-        addMatch({
-          limitMatch: limitMatch,
-        })
-      );
-      props.handleCloseReply();
-      navigate("/GameManagement");
+    if (namePlayer) {
+      if (props.name === "Add" || props.name === "Add Player") {
+        dispatch(
+          addUser({
+            id:
+              userList.length === 0 ? 1 : userList[userList.length - 1].id + 1,
+            name: namePlayer,
+          })
+        );
+        if (props.name === "Add Player") {
+          navigate("/ListPlayer");
+        }
+        props.handleCloseReply();
+      }
+      return;
+    }
+    if (limitMatch) {
+      if (props.name === "Match") {
+        dispatch(
+          addMatch({
+            limitMatch: limitMatch,
+          })
+        );
+        props.handleCloseReply();
+        navigate("/GameManagement");
+      }
+      return;
     }
   };
   return (
@@ -40,7 +51,9 @@ function ModalCustom(props) {
       <Modal show={props.props} onHide={props.handleCloseReply}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {props.name === "Add" ? "Add New Player" : "Limit Match"}
+            {props.name === "Add" && "Add New Player"}
+            {props.name === "Add Player" && "Add New Player"}
+            {props.name === "Match" && "Limit Match"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -50,9 +63,9 @@ function ModalCustom(props) {
             </InputGroup.Text>
             <Form.Control
               onChange={(e) => {
-                props.name === "Add"
-                  ? setNamePlayer(e.target.value)
-                  : setLimitMatch(e.target.value);
+                props.name === "Add" && setNamePlayer(e.target.value);
+                props.name === "Add Player" && setNamePlayer(e.target.value);
+                props.name === "Match" && setLimitMatch(e.target.value);
               }}
               aria-label="Large"
               aria-describedby="inputGroup-sizing-sm"
