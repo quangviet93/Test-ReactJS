@@ -1,16 +1,10 @@
-// import "./App.css";
-// import "react-toastify/dist/ReactToastify.css";
-// import { ToastContainer } from "react-toastify";
-// import { useState } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { addUser, deleteUser, updateUsername } from "./features/Users";
-// import Modal from "./Component/Modal";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StartGame from "./page/StartGame";
 import AddPlayer from "./page/AddPlayer";
 import ListPlayer from "./page/ListPlayer";
 import GameManagement from "./page/GameManagement";
 import History from "./page/History";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (

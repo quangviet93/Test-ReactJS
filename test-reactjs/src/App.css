@@ -36,6 +36,9 @@
     transform: rotate(360deg);
   }
 }
+.title-game {
+  font-size: 30px;
+}
 .screenStartGame,
 .screenAddPlayer {
   display: flex;
@@ -44,27 +47,9 @@
   align-items: center;
   width: 100%;
 }
-table {
+.tableUserList {
+  max-width: 400px;
   margin: 0 auto;
-}
-tbody {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 30px;
-}
-tbody tr {
-  display: flex;
-  justify-content: space-between;
-}
-th,
-td {
-  display: flex;
-  justify-content: center;
-  width: 50%;
-  border: 1px solid #333;
-}
-th {
-  width: 150px;
 }
 .buttonAddPlayer {
   height: 50px;
@@ -74,7 +59,6 @@ th {
   justify-content: space-between;
 }
 .buttonListPlayer button {
-  width: 40%;
   height: 50px;
 }
 .screenGameManagement {
@@ -86,27 +70,41 @@ th {
   justify-content: center;
   align-items: center;
 }
-.match {
-  width: 100px;
-  height: 40px;
-  background-color: gray;
-  border-radius: 5px;
+.yesOrno {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
+}
+.yesOrno div {
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+}
+.yesOrno button {
+  width: 200px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  font-size: 60px;
+}
+.match {
+  background-color: gray;
+  border-radius: 10px;
+  padding: 40px;
+  font-size: 30px;
 }
 .player {
   padding: 40px;
-}
-.question {
-  display: flex;
-  padding-bottom: 40px;
-}
-.question div:first-child {
-  margin-right: 10px;
+  font-size: 30px;
 }
 .answer {
   display: flex;
   padding: 0 30px;
+}
+.image-answer button {
+  margin-top: 50px;
+}
+.backgroup-yes {
+  background-color: #0dcaf0;
+}
+.backgroup-no {
+  background-color: #ffc107;
 }

@@ -1,28 +1,41 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { UsersData } from "../FakeData";
-
 export const userSlice = createSlice({
   name: "users",
-  initialState: { value: UsersData },
+  initialState: {
+    users: [],
+    awnser: {
+      // name: {
+      //   name: "",
+      //   awnserPlayer: [],
+      //   score: 0,
+      // },
+    },
+  },
   reducers: {
     addUser: (state, action) => {
-      state.value.push(action.payload);
+      state.users.push(action.payload);
     },
-
-    deleteUser: (state, action) => {
-      state.value = state.value.filter((user) => user.id !== action.payload.id);
-    },
-
-    updateUsername: (state, action) => {
-      state.value.map((user) => {
-        if (user.id === action.payload.id) {
-          user.username = action.payload.username;
-        }
-      });
+    dataAnswer: (state, action) => {
+      const data = action.payload;
+      const isCorrect = data.isCorrect;
+      console.log(data);
+      if (!state.awnser[data.namePlayer]) {
+        state.awnser[data.namePlayer] = {
+          name: "",
+          awnserPlayer: [],
+          score: 0,
+        };
+      }
+      state.awnser[data.namePlayer].name = data.namePlayer;
+      state.awnser[data.namePlayer].awnserPlayer.push(data.answer);
+      if (isCorrect === true) {
+        state.awnser[data.namePlayer].score =
+          state.awnser[data.namePlayer].score + 1;
+      }
     },
   },
 });
 
-export const { addUser, deleteUser, updateUsername } = userSlice.actions;
+export const { addUser, dataAnswer } = userSlice.actions;
 export default userSlice.reducer;

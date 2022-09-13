@@ -7,14 +7,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
 import usersReducer from "./features/Users";
-import answerReducer from "./features/Answer";
-import resultReducer from "./features/Result";
 
 const store = configureStore({
   reducer: {
     users: usersReducer,
-    answer: answerReducer,
-    result: resultReducer,
   },
 });
 

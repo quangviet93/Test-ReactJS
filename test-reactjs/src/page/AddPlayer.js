@@ -1,5 +1,6 @@
 import TitleGame from "../Component/TitleGame";
 import "../App.css";
+import Button from "react-bootstrap/Button";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useState } from "react";
@@ -14,14 +15,14 @@ const AddPlayer = () => {
         <TitleGame />
       </div>
       <div>
-        <button
+        <Button
           className="buttonAddPlayer"
           onClick={() => {
             setModalOpen(true);
           }}
         >
           AddPlayer
-        </button>
+        </Button>
         <ToastContainer />
         {modalOpen && <Modal setOpenModal={setModalOpen} />}
       </div>

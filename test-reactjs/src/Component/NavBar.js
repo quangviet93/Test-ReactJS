@@ -1,12 +1,13 @@
 import React from "react";
 import "./NavBar.css";
+import Button from "react-bootstrap/Button";
 
 function NavBar() {
   return (
     <div className="navbar">
-      <div>Yes No WTF GAME</div>
+      <div className="title-game">Yes No WTF GAME</div>
       <div>
-        <button>Player History</button>
+        <Button variant="secondary">Player History</Button>
       </div>
     </div>
   );

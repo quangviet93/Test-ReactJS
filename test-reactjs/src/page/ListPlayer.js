@@ -1,24 +1,27 @@
 import React from "react";
 import "../App.css";
-
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import TitleGame from "../Component/TitleGame";
 function ListPlayer() {
   const navigate = useNavigate();
 
-  const userList = useSelector((state) => state.users.value);
+  const userList = useSelector((state) => state.users.users);
   return (
     <div>
       <div className="displayUsers">
         <TitleGame />
-        <div>
-          <table>
-            <tbody>
+        <div className="tableUserList">
+          <Table striped bordered hover>
+            <thead>
               <tr>
                 <th>#</th>
-                <th>Name</th>
+                <th>First Name</th>
               </tr>
+            </thead>
+            <tbody>
               {userList.map((user) => {
                 return (
                   <tr key={user.id}>
@@ -28,23 +31,24 @@ function ListPlayer() {
                 );
               })}
             </tbody>
-            <div className="buttonListPlayer">
-              <button
-                onClick={() => {
-                  navigate("/AddPlayer");
-                }}
-              >
-                Add More Player
-              </button>
-              <button
-                onClick={() => {
-                  navigate("/GameManagement");
-                }}
-              >
-                Start The Game
-              </button>
-            </div>
-          </table>
+          </Table>
+          <div className="buttonListPlayer">
+            <Button
+              variant="warning"
+              onClick={() => {
+                navigate("/AddPlayer");
+              }}
+            >
+              Add More Player
+            </Button>
+            <Button
+              onClick={() => {
+                navigate("/GameManagement");
+              }}
+            >
+              Start The Game
+            </Button>
+          </div>
         </div>
       </div>
     </div>

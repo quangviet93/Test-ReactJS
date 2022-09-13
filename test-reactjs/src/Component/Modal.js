@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addUser, deleteUser, updateUsername } from "../features/Users";
+import { addUser } from "../features/Users";
 import { useNavigate } from "react-router-dom";
-
+import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-
 import "./Modal.css";
 import { toast } from "react-toastify";
 
@@ -33,14 +32,11 @@ function Modal({ setOpenModal }) {
     });
     setOpenModal(false);
     navigate("/ListPlayer");
-    // setTimeout(() => {
-    //   navigate("/ListPlayer");
-    // }, 2000);
   };
 
   const [name, setName] = useState("");
   const dispatch = useDispatch();
-  const userList = useSelector((state) => state.users.value);
+  const userList = useSelector((state) => state.users.users);
 
   return (
     <div className="modalBackground">
@@ -59,7 +55,8 @@ function Modal({ setOpenModal }) {
           ></input>
         </div>
         <div className="footer">
-          <button
+          <Button
+            variant="success"
             onClick={() => {
               dispatch(
                 addUser({
@@ -74,8 +71,9 @@ function Modal({ setOpenModal }) {
             }}
           >
             Ok
-          </button>
-          <button
+          </Button>{" "}
+          <Button
+            variant="danger"
             onClick={() => {
               error();
               setOpenModal(false);
@@ -83,7 +81,7 @@ function Modal({ setOpenModal }) {
             id="cancelBtn"
           >
             Cancel
-          </button>
+          </Button>
         </div>
       </div>
     </div>

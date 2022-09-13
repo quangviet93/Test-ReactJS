@@ -1,8 +1,6 @@
 .modalBackground {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  top: 47px;
 }
 
 .modalContainer {
@@ -34,11 +32,7 @@
 }
 
 .modalContainer .body {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center; */
+  padding-bottom: 10px;
 }
 .modalContainer .body p {
   width: 100%;
@@ -50,20 +44,4 @@
 }
 .modalContainer .footer button a {
   color: white;
-}
-
-.modalContainer .footer button {
-  width: 120px;
-  height: 40px;
-  margin: 10px 10px 10px 0;
-  border: none;
-  background-color: cornflowerblue;
-  color: white;
-  border-radius: 8px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-#cancelBtn {
-  background-color: crimson;
 }

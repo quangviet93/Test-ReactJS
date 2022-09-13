@@ -1,6 +1,8 @@
 import React from "react";
 import NavBar from "../Component/NavBar";
 import { useSelector, useDispatch } from "react-redux";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
 function History() {
   const userList = useSelector((state) => state.users.value);
@@ -10,40 +12,26 @@ function History() {
   return (
     <div className="screenGameManagement">
       <NavBar />
-      <div>
-        <div>
-          <table>
-            <tbody>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Answer</th>
-                <th>Result</th>
-              </tr>
-              {userList.map((user) => {
-                return (
-                  <tr key={user.id}>
-                    <th>{user.id}</th>
-                    <th>{user.name}</th>
-                    <div>
-                      {answers.map((answer) => {
-                        if (answer.name === user.name) {
-                          return <th>{String(answer.value)}</th>;
-                        }
-                      })}
-                    </div>
-                    <div>
-                      {results.map((result) => {
-                        return <th>{String(result.value)}</th>;
-                      })}
-                    </div>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Answer</th>
+            <th>Result</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Otto</td>
+          </tr>
+        </tbody>
+      </Table>
     </div>
   );
 }
