@@ -1,4 +1,5 @@
 import React from "react";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import NavBar from "../Component/NavBar";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -7,6 +8,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import BootstrapTable from "react-bootstrap-table-next";
 import { searchPlayerName } from "../features/Users";
 
 function History() {
@@ -40,6 +42,34 @@ function History() {
   useEffect(() => {
     handleSearch();
   }, [searchNamePlayer]);
+  const CovertObjInArray = Object.values(answers);
+  const products = CovertObjInArray.map((e) => {
+    return {
+      ...e,
+      answerApi: e.answerApi.join(" | "),
+      answerPlayer: e.answerPlayer.join(" | "),
+    };
+  });
+
+  const columns = [
+    {
+      dataField: "name",
+      text: "Name",
+      sort: true,
+    },
+    {
+      dataField: "answerPlayer",
+      text: "Answer",
+    },
+    {
+      dataField: "answerApi",
+      text: "Result",
+    },
+    {
+      dataField: "score",
+      text: "Score",
+    },
+  ];
 
   return (
     <div className="screenGameManagement">
@@ -57,7 +87,7 @@ function History() {
           />
         </InputGroup>
       </div>
-      <Table striped bordered hover>
+      {/* <Table striped bordered hover>
         <thead>
           <tr>
             <th>Name</th>
@@ -81,7 +111,9 @@ function History() {
             )
           )}
         </tbody>
-      </Table>
+      </Table> */}
+      <BootstrapTable keyField="id" data={products} columns={columns} />
+
       <Table striped bordered hover>
         <thead>
           <tr>

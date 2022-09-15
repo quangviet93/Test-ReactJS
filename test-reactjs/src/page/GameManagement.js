@@ -16,7 +16,8 @@ function GameManagement() {
   const [isLastPlayer, setIsLastPlayer] = useState(false);
   const [isFinish, setIsFinish] = useState(false);
 
-  const users = useSelector((state) => state.users.users);
+  const users = JSON.parse(localStorage.getItem("listUser"));
+
   const limitMatch = useSelector((state) => state.users.limitMatch);
 
   const navigate = useNavigate();

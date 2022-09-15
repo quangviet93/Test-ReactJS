@@ -17,7 +17,8 @@ function ListPlayer() {
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = () => setShowDelete(true);
 
-  const userList = useSelector((state) => state.users.users);
+  const userList = JSON.parse(localStorage.getItem("listUser"));
+
   return (
     <div>
       <div className="displayUsers">

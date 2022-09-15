@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
   name: "users",
   initialState: {
-    users: [],
+    users: JSON.parse(localStorage.getItem("listUser")) || [],
     limitMatch: 0,
     answer: {
       // name: {
@@ -16,6 +16,7 @@ export const userSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       state.users.push(action.payload);
+      localStorage.setItem("listUser", JSON.stringify(state.users));
     },
     addMatch: (state, action) => {
       const limit = Number(action.payload.limitMatch);
